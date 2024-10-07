@@ -3,6 +3,8 @@
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Hero } from '@/components/Hero'
+import Landing from './landing'
+
 
 export default function Home() {
 
@@ -10,7 +12,7 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <Hero />
+        <Landing />
       </main>
       <Footer />
     </>
