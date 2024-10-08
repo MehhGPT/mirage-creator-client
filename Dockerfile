@@ -1,6 +1,6 @@
 FROM node:20 AS builder
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY . .
 RUN npm install
