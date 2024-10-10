@@ -2,8 +2,7 @@
 
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
-import { Hero } from '@/components/Hero'
-import Landing from './landing'
+import { Hero, How, Start, Why } from '@/components/Sections'
 
 
 export default function Home() {
@@ -12,7 +11,10 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <Landing />
+        <Hero />
+        <Why />
+        <How />
+        <Start />
       </main>
       <Footer />
     </>

@@ -7,6 +7,8 @@ import clsx from 'clsx'
 import { Container } from '@/components/Container'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import ThemeToggle from './ToogleTheme'
+import Logo from "@/images/Dark.svg";
+import Image from 'next/image'
 
 function MobileNavLink({
   href,
@@ -95,13 +97,13 @@ function MobileNavigation() {
 
 export function Header() {
   return (
-    <header className="py-5 bg-dark">
+    <header className="py-5 fixed w-[100svw] bg-[#000000aa] backdrop-blur-md z-10 top-0">
       <Container>
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
             <Link href="#" aria-label="Home">
+            <Image src={Logo} alt='Logo' className='h-10 w-auto' />
               {/* <Logo className="h-10 w-auto" /> */}
-              App Logo
             </Link>
             <div className="hidden md:flex md:gap-x-6">
             </div>

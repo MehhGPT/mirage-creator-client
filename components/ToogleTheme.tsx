@@ -1,5 +1,6 @@
 // components/ThemeToggle.tsx
 import { GearIcon } from '@radix-ui/react-icons';
+import { SunIcon, MoonIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 const ThemeToggle = () => {
@@ -29,7 +30,7 @@ const ThemeToggle = () => {
 
 	return (
 		<button onClick={toggleTheme}>
-			<GearIcon />
+			{theme === 'light' ? <MoonIcon className='text-white ease-in-out duration-200' /> : <SunIcon className='ease-in-out duration-200' />}
 		</button>
 	);
 };
