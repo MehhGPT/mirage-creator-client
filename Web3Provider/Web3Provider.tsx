@@ -1,41 +1,37 @@
 import '@rainbow-me/rainbowkit/styles.css';
-
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import {
-  arbitrum,
-  base,
-  mainnet,
-  optimism,
-  polygon,
-  sepolia,
   polygonAmoy
 } from 'wagmi/chains';
-import { darkTheme, getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { darkTheme, getDefaultConfig, RainbowKitProvider, Theme } from '@rainbow-me/rainbowkit';
 import { Props } from 'next/script';
+import merge from 'lodash.merge';
 
 const config = getDefaultConfig({
   appName: 'Mirage Creators',
-  projectId: 'ClientId For DAPP',
+  projectId: process.env.NEXT_PUBLIC_WEB3_KEY as string,
   chains: [
-    mainnet,
-    polygon,
     polygonAmoy,
-    optimism,
-    arbitrum,
-    base,
-    sepolia
   ],
   ssr: true,
 });
 
 const client = new QueryClient();
 
+const myTheme = merge(
+  darkTheme({overlayBlur: "large"}), {
+      colors: {
+          accentColor: '#1c1c1c',
+      },
+  } as Theme
+);
+
 function Web3Provider(props: Props) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={client}>
-        <RainbowKitProvider theme={darkTheme()}>
+        <RainbowKitProvider theme={myTheme}>
           {props.children}
         </RainbowKitProvider>
       </QueryClientProvider>

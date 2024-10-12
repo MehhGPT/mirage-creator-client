@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { Star, DollarSign, TrendingUp, Users, Award, Zap } from "lucide-react"
+import Link from "next/link"
 
 export function Hero() {
     return (
@@ -17,14 +18,6 @@ export function Hero() {
                 <p className="mx-auto max-w-[700px] text-lg md:text-xl opacity-80 animate-fade-in-up">
                     The ultimate platform for writers, artists, and storytellers to showcase their work, build a fanbase, and earn rewards for their creativity.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 mt-8 animate-fade-in-up">
-                    <Button size="lg" className="text-lg py-6 px-8 bg-black text-white dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300">
-                        Start Creating
-                    </Button>
-                    <Button size="lg" variant="outline" className="text-lg py-6 px-8 bg-transparent border-black text-black dark:border-white dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors duration-300">
-                        Explore Stories
-                    </Button>
-                </div>
             </div>
         </div>
     )
@@ -104,6 +97,64 @@ export function Start() {
                             By signing up, you agree to our Terms of Service and Privacy Policy.
                         </p>
                     </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export function CreatePage() {
+    return (
+        <div className="w-full py-20 md:py-32 lg:py-40 relative overflow-hidden bg-gray-100 dark:bg-gray-900">
+            <div className="container px-4 md:px-6 relative">
+                <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-center mb-12 animate-on-scroll">
+                    Create Your Page
+                </h2>
+                <div className="grid gap-12 lg:grid-cols-3">
+                    {[
+                        { step: 1, title: "Mint Page", description: "Mint A StoryNFT (Page) for a particluar Story of you liking." },
+                        { step: 2, title: "Upload Page", description: "Upload your Creative work, and link it to the NFT." },
+                        { step: 3, title: "Complete Creation", description: "Wait for verification, then share your story to others" },
+                    ].map((item, index) => (
+                        <div key={index} className="flex flex-col items-center space-y-4 p-8 rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300 animate-on-scroll">
+                            <div className="w-16 h-16 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-2xl font-bold">{item.step}</div>
+                            <h3 className="text-2xl font-bold text-center">{item.title}</h3>
+                            <p className="text-lg opacity-80 text-center">{item.description}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className="flex items-center justify-center mt-10">
+                <Link href="/create/page">
+                    <Button size="lg" className="text-lg py-6 px-8 bg-black text-white dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300">
+                        Start Creating
+                    </Button>
+                </Link>
+            </div>
+        </div>
+    )
+}
+
+export function CreateStory() {
+    return (
+        <div className="w-full py-20 md:py-32 lg:py-40 relative overflow-hidden bg-gray-100 dark:bg-gray-900">
+            <div className="container px-4 md:px-6 relative">
+                <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-center mb-12 animate-on-scroll">
+                    Start Your Page
+                </h2>
+                <div className="grid gap-8 lg:grid-cols-4">
+                    {[
+                        { step: 1, title: "Create Story NFT", description: "Create NFFT for your Story." },
+                        { step: 2, title: "Upload Story Cover", description: "Upload Cover for your Story" },
+                        { step: 3, title: "Upload Page", description: "Upload your Creative work, and link it to the NFT." },
+                        { step: 4, title: "Complete Creation", description: "Wait for verification, then share your story to others" },
+                    ].map((item, index) => (
+                        <div key={index} className="flex flex-col items-center space-y-4 p-8 rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300 animate-on-scroll">
+                            <div className="w-16 h-16 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-2xl font-bold">{item.step}</div>
+                            <h3 className="text-2xl font-bold text-center">{item.title}</h3>
+                            <p className="text-lg opacity-80 text-center">{item.description}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
