@@ -1,4 +1,3 @@
-// src/pages/index.tsx
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -39,7 +38,10 @@ export default function CreatePage() {
 
   // Handle the upload of multiple images with index
   const handleUpload = async () => {
-    if (images.length === 0 || !storyID || !pageID) return;
+    if (images.length === 0 || !storyID || !pageID) {
+      alert('Please provide both Story ID, Page ID and select images.');
+      return;
+    }
 
     setLoading(true); // Start loading
 

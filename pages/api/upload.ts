@@ -1,8 +1,9 @@
-// src/pages/api/upload.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import multer from 'multer';
 import path from 'path';
 import { promises as fs } from 'fs';
+import { createReadStream } from 'fs';
+import { stat } from 'fs/promises';
 
 // Configure multer to store files with their original names and extensions
 const storage = multer.diskStorage({
@@ -51,15 +52,47 @@ export default async function handler(req: NextApiRequestWithFile, res: NextApiR
   const uploadDir = path.join(process.cwd(), 'uploads');
   await fs.mkdir(uploadDir, { recursive: true }); // Ensure the upload directory exists
 
-  // Run the multer middleware
-  await runMiddleware(req, res, upload.single('mirage'));
+  if (req.method === 'POST') {
+    // Run the multer middleware for file uploads
+    await runMiddleware(req, res, upload.single('mirage'));
 
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    // The file has been uploaded successfully, and `req.file` contains the file details
+    const fileUrl = `${req.headers.host}/api/upload?filename=${req.file.filename}`;
+
+    return res.status(200).json({ url: fileUrl });
+  } else if (req.method === 'GET') {
+    const { filename } = req.query;
+
+    if (!filename) {
+      return res.status(400).json({ error: 'Filename is required' });
+    }
+
+    const filePath = path.join(uploadDir, filename as string);
+
+    try {
+      // Check if the file exists
+      const fileStat = await stat(filePath);
+
+      if (fileStat.isFile()) {
+        // Set headers for content type and content length
+        res.setHeader('Content-Type', 'image/jpeg'); // Adjust based on your file type, e.g., png, jpeg
+        res.setHeader('Content-Length', fileStat.size);
+
+        // Pipe the file stream directly to the response
+        const fileStream = createReadStream(filePath);
+        fileStream.pipe(res);
+      } else {
+        return res.status(404).json({ error: 'File not found' });
+      }
+    } catch (error) {
+      return res.status(404).json({ error: 'File not found' });
+    }
+  } else {
+    res.setHeader('Allow', ['POST', 'GET']);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
-
-  // The file has been uploaded successfully, and `req.file` contains the file details
-  const fileUrl = `${req.headers.host}/uploads/${req.file.filename}`;
-
-  return res.status(200).json({ url: fileUrl });
 }
