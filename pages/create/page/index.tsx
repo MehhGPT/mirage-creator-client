@@ -62,7 +62,7 @@ export default function CreatePage() {
             },
           }
         );
-        urls.push(`http://${data.url}`); // Add uploaded URL to the array
+        urls.push(`https://${data.url}`); // Add uploaded URL to the array
       }
       setUploadUrls(urls); // Set all uploaded URLs
     } catch (error) {
