@@ -79,7 +79,7 @@ export default async function handler(req: NextApiRequestWithFile, res: NextApiR
 
       if (fileStat.isFile()) {
         // Set headers for content type and content length
-        res.setHeader('Content-Type', 'image/jpeg'); // Adjust based on your file type, e.g., png, jpeg
+        res.setHeader('Content-Type', 'image/*'); // Adjust based on your file type, e.g., png, jpeg
         res.setHeader('Content-Length', fileStat.size);
 
         // Pipe the file stream directly to the response
