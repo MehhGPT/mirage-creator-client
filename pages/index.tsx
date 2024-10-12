@@ -30,6 +30,7 @@ export default function Home() {
 
   return (
     <div>
+      <Header />
       <main>
         <Hero />
         <Why />
