@@ -158,7 +158,7 @@ export default function CreatePage() {
                 <img
                   src={url}
                   alt={`Uploaded ${index + 1}`}
-                  className="max-w-full h-auto rounded-lg shadow-lg"
+                  className="max-w-full h-auto rounded-lg drop-shadow-lg"
                 />
               </div>
             ))}
