@@ -4,8 +4,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/public/uploads/:path*',
-        destination: '/public/uploads/:path*', // Serve images directly
+        source: '/uploads/:path*',
+        destination: '/uploads/:path*', // Serve images directly
       },
     ];
   },
