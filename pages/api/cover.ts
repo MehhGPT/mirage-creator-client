@@ -5,22 +5,20 @@ import { promises as fs } from 'fs';
 import { createReadStream } from 'fs';
 import { stat } from 'fs/promises';
 import connectMongoDB from '@/lib/mongo';
-import { Page } from '@/models/model';
+import { Story } from '@/models/model';
 
 // Configure multer to store files with their original names and extensions
 const storage = multer.diskStorage({
-  destination: 'uploads/pages/', // Path where files are saved
+  destination: 'uploads/covers/', // Path where files are saved
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname); // Extract the original file extension
-    const storyID = req.query.storyId as string;
-    const pageID = req.query.pageId as string;
-    const index = req.query.index as string; // Retrieve the index from the request query params
+    const storyID = req.query.storyId as string; // Retrieve the index from the request query params
 
-    if (!storyID || !pageID || !index) {
-      return cb(new Error('Missing StoryID, PageID, or Index in query parameters'), '');
+    if (!storyID) {
+      return cb(new Error('Missing StoryID in query parameters'), '');
     }
 
-    const newFilename = `mirage_${storyID}_${pageID}_${index}${ext}`; // Format: mirage_storyID_pageID_index.ext
+    const newFilename = `cover_${storyID}_${ext}`; // Format: mirage_storyID_pageID_index.ext
     cb(null, newFilename);
   },
 });
@@ -51,7 +49,7 @@ export const config = {
 };
 
 export default async function handler(req: NextApiRequestWithFile, res: NextApiResponse) {
-  const uploadDir = path.join(process.cwd(), 'uploads/pages');
+  const uploadDir = path.join(process.cwd(), 'uploads/covers');
   await fs.mkdir(uploadDir, { recursive: true }); // Ensure the upload directory exists
 
   if (req.method === 'POST') {
@@ -64,9 +62,11 @@ export default async function handler(req: NextApiRequestWithFile, res: NextApiR
     }
 
     // The file has been uploaded successfully, and `req.file` contains the file details
-    const fileUrl = `${req.headers.host}/api/upload?filename=${req.file.filename}`;
+    const fileUrl = `${req.headers.host}/api/cover?filename=${req.file.filename}`;
 
-    await Page.create({ storyId: req.query.storyId, pageId: req.query.pageId, creatorAddress: req.query.creatorAddress, pageLink: fileUrl, parentPageId: req.query.parentPageId as string });
+	// /api/cover?storyId=${storyID}&storyAddress=${storyAddress}&creatorAddress=${address}&storyName=${storyName}&storyDetails=${storyDetails}
+
+    await Story.create({ storyId: req.query.storyId, storyAddress: req.query.storyAddress, creatorAddress: req.query.creatorAddress, storyName: req.query.storyName, storyDetails: req.query.storyDetails });
 
     return res.status(200).json({ url: fileUrl });
   } else if (req.method === 'GET') {

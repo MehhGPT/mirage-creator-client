@@ -1,6 +1,6 @@
 import '@rainbow-me/rainbowkit/styles.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { WagmiProvider } from 'wagmi';
+import { http, WagmiProvider } from 'wagmi';
 import {
   polygonAmoy
 } from 'wagmi/chains';
@@ -15,6 +15,9 @@ const config = getDefaultConfig({
     polygonAmoy,
   ],
   ssr: true,
+  transports: {
+    [polygonAmoy.id]: http("https://polygon-amoy.infura.io/v3/549e942a01c140bd96ec9f0f97198d21"),
+  }
 });
 
 const client = new QueryClient();

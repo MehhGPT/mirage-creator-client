@@ -18,7 +18,8 @@ const PageSchema = new Schema(
 		storyId: String,
 		pageId: String,
 		creatorAddress: String,
-		pagesLink: String,
+		pageLink: String,
+		parentPageId: String,
 	},
 	{
 		timestamps: true

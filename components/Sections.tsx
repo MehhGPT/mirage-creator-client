@@ -140,7 +140,7 @@ export function CreateStory() {
         <div className="w-full py-20 md:py-32 lg:py-40 relative overflow-hidden bg-gray-100 dark:bg-gray-900">
             <div className="container px-4 md:px-6 relative">
                 <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-center mb-12 animate-on-scroll">
-                    Start Your Page
+                    Start Your Story
                 </h2>
                 <div className="grid gap-8 lg:grid-cols-4">
                     {[
@@ -158,7 +158,7 @@ export function CreateStory() {
                 </div>
             </div>
             <div className="flex items-center justify-center mt-10">
-                <Link href="/create/page">
+                <Link href="/create/story">
                     <Button size="lg" className="text-lg py-6 px-8 bg-black text-white dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300">
                         Create Your Story Now!!
                     </Button>
