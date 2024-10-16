@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Header } from '@/components/Header';
+import { useAccount } from 'wagmi';
 
 export default function CreatePage() {
   const [images, setImages] = useState<File[]>([]); // Stores up to 3 images
@@ -8,6 +9,7 @@ export default function CreatePage() {
   const [loading, setLoading] = useState(false); // Loading state to show UI during upload
   const [storyID, setStoryID] = useState(''); // Input for Story ID
   const [pageID, setPageID] = useState(''); // Input for Page ID
+  const { address } = useAccount();
 
   // Handle multiple image selection (limit to 3 images)
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +56,7 @@ export default function CreatePage() {
 
         // Send each image with the index appended to the file name
         const { data } = await axios.post(
-          `/api/upload?storyID=${storyID}&pageID=${pageID}&index=${i + 1}`,
+          `/api/upload?storyID=${storyID}&pageID=${pageID}&index=${i + 1}&creatorAddress=${address}`,
           formData,
           {
             headers: {
@@ -62,7 +64,7 @@ export default function CreatePage() {
             },
           }
         );
-        urls.push(`https://${data.url}`); // Add uploaded URL to the array
+        urls.push(`http://${data.url}`); // Add uploaded URL to the array
       }
       setUploadUrls(urls); // Set all uploaded URLs
     } catch (error) {

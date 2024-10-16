@@ -4,6 +4,8 @@ import path from 'path';
 import { promises as fs } from 'fs';
 import { createReadStream } from 'fs';
 import { stat } from 'fs/promises';
+import connectMongoDB from '@/lib/mongo';
+import { Page } from '@/models/model';
 
 // Configure multer to store files with their original names and extensions
 const storage = multer.diskStorage({
@@ -55,6 +57,7 @@ export default async function handler(req: NextApiRequestWithFile, res: NextApiR
   if (req.method === 'POST') {
     // Run the multer middleware for file uploads
     await runMiddleware(req, res, upload.single('mirage'));
+    await connectMongoDB();
 
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
@@ -62,6 +65,8 @@ export default async function handler(req: NextApiRequestWithFile, res: NextApiR
 
     // The file has been uploaded successfully, and `req.file` contains the file details
     const fileUrl = `${req.headers.host}/api/upload?filename=${req.file.filename}`;
+
+    await Page.create({ storyId: req.query.storyID, pageId: req.query.pageID, creatorAddress: req.query.creatorAddress, pagesLink: fileUrl });
 
     return res.status(200).json({ url: fileUrl });
   } else if (req.method === 'GET') {

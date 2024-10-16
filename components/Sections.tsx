@@ -127,7 +127,7 @@ export function CreatePage() {
             <div className="flex items-center justify-center mt-10">
                 <Link href="/create/page">
                     <Button size="lg" className="text-lg py-6 px-8 bg-black text-white dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300">
-                        Start Creating
+                        Create Your Page Now!!
                     </Button>
                 </Link>
             </div>
@@ -156,6 +156,13 @@ export function CreateStory() {
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className="flex items-center justify-center mt-10">
+                <Link href="/create/page">
+                    <Button size="lg" className="text-lg py-6 px-8 bg-black text-white dark:bg-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-300">
+                        Create Your Story Now!!
+                    </Button>
+                </Link>
             </div>
         </div>
     )

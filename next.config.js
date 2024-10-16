@@ -11,7 +11,7 @@ const nextConfig = {
   },
   images: {
     domains: ['localhost', 'creator.mirage.patel96.live'],
-  },  
+  },
 };
 
 module.exports = nextConfig;
