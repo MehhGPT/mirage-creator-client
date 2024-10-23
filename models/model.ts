@@ -7,6 +7,7 @@ const StorySchema = new Schema(
 		creatorAddress: String,
 		storyName: String,
 		storyDetails: String,
+		coverImage: String,
 	},
 	{
 		timestamps: true

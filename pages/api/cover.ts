@@ -66,7 +66,7 @@ export default async function handler(req: NextApiRequestWithFile, res: NextApiR
 
 	// /api/cover?storyId=${storyID}&storyAddress=${storyAddress}&creatorAddress=${address}&storyName=${storyName}&storyDetails=${storyDetails}
 
-    await Story.create({ storyId: req.query.storyId, storyAddress: req.query.storyAddress, creatorAddress: req.query.creatorAddress, storyName: req.query.storyName, storyDetails: req.query.storyDetails });
+    await Story.create({ storyId: req.query.storyId, storyAddress: req.query.storyAddress, creatorAddress: req.query.creatorAddress, storyName: req.query.storyName, storyDetails: req.query.storyDetails, coverImage: fileUrl });
 
     return res.status(200).json({ url: fileUrl });
   } else if (req.method === 'GET') {
