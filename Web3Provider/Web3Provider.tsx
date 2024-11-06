@@ -16,7 +16,7 @@ const config = getDefaultConfig({
   ],
   ssr: true,
   transports: {
-    [polygonAmoy.id]: http("https://polygon-amoy.infura.io/v3/549e942a01c140bd96ec9f0f97198d21"),
+    [polygonAmoy.id]: http("https://polygon-amoy-bor-rpc.publicnode.com"),
   }
 });
 

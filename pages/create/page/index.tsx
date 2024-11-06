@@ -86,7 +86,7 @@ export default function CreatePage() {
                         },
                     }
                 );
-                urls.push(`https://${data.url}`); // Add uploaded URL to the array
+                urls.push(`${process.env.NEXT_PUBLIC_URL_PROTOCOL}://${data.url}`); // Add uploaded URL to the array
             }
             setUploadUrls(urls); // Set all uploaded URLs
         } catch (error) {
@@ -192,7 +192,6 @@ export default function CreatePage() {
                                 <input
                                     type="text"
                                     value={storyAddress}
-                                    onChange={(e) => setParentPageID(e.target.value)}
                                     className="w-full px-4 py-2 border border-gray-300 text-black rounded focus:outline-none focus:border-blue-500"
                                     placeholder="Story Address"
                                     disabled
