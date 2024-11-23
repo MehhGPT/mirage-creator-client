@@ -10,7 +10,7 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ['localhost', 'creator.mirage.patel96.live'],
+    domains: ['localhost', 'creator.mirage.patel96.live', 'http'],
   },
 };
 
